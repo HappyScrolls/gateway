@@ -1,0 +1,13 @@
+server:
+  port: 8083
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: soon_route
+          uri: http://localhost:8080
+          predicates:
+            - Path=/soon/**
+#          filters:
+#            - SoonAuthentication
