@@ -1,13 +1,22 @@
 server:
-  port: 8083
+  port: 8081
 
 spring:
   cloud:
     gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':  # 모든 경로에 대해 CORS 허용
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+            allowCredentials: false
       routes:
-        - id: soon_route
-          uri: http://localhost:8080
+        - id: account-service
+          uri: http://localhost:8030
           predicates:
-            - Path=/soon/**
-#          filters:
-#            - SoonAuthentication
+            - Path=/**
+        - id: schedule-service
+          uri: http://localhost:8084
+          predicates:
+            - Path=/**
